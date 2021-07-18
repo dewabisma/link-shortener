@@ -1,0 +1,10 @@
+@use './assets/font';
+@use './assets/variable';
+
+// Global Style
+
+body {
+  font-family: variable.$normal-text-font-family;
+  font-size: variable.$normal-text-font-size;
+  font-weight: variable.$normal-text-font-weight;
+}

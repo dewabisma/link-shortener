@@ -1,0 +1,27 @@
+@use '../../assets/variable';
+
+.searchBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+
+  input[type="text"] {
+    width: 75%;
+    padding: 0.5rem 1rem;
+    background-color: variable.$light-bg;
+    border: none;
+    border-radius: variable.$default-border-radius;
+    font-family: variable.$url-body-font-family;
+    font-weight: variable.$url-body-font-weight;
+    font-size: variable.$url-body-font-size;
+    color: variable.$primary-text;
+  }
+
+  button {
+    width: 15%;
+    background-color: variable.$accent-color;
+    border: none;
+    border-radius: variable.$default-border-radius;
+    color: variable.$white-text;
+  }
+}

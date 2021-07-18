@@ -1,0 +1,19 @@
+@use '../../assets/variable';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    color: variable.$accent-color;
+    text-decoration: underline;
+    font-family: variable.$logo-font-family;
+    font-size: variable.$logo-font-size;
+    font-weight: variable.$logo-font-weight;
+  }
+
+  p {
+    color: variable.$unimportant-text;
+  }
+}
