@@ -1,0 +1,37 @@
+.table {
+  .tableCaption {
+    display: flex;
+    align-items: center;
+
+    h3 {
+      margin-right: 1rem;
+    }
+
+    button {
+      background-color: transparent;
+      border: none;
+    }
+  }
+
+  table {
+    width: 100%;
+    border-spacing: 0;
+  }
+
+  .tableHead {
+    th:first-child {
+      width: 70%;
+      text-align: left;
+    }
+
+    th:nth-child(2) {
+      width: 10%;
+      text-align: center;
+    }
+
+    th:last-child {
+      width: 20%;
+      text-align: center;
+    }
+  }
+}
