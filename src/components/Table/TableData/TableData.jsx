@@ -13,34 +13,33 @@ const TableData = ({ url, shortenedUrl, shortcode }) => {
     redirectCount: 0,
     lastSeenDate: "-",
     error: null,
-    status: "idle",
+    status: "loading",
   });
 
-  const getShortcodeStats = async (code) => {
-    try {
-      setStats({ ...stats, status: "loading" });
-
-      const { data } = await axios.get(`/${code}/stats`);
-
-      const lastVisitedTime = data.lastSeenDate
-        ? formatDistanceToNow(new Date(String(data.lastSeenDate)))
-        : "-";
-
-      setStats({
-        ...stats,
-        redirectCount: data.redirectCount,
-        lastSeenDate: lastVisitedTime,
-        status: "success",
-      });
-    } catch (error) {
-      const errMsg = error.response.data;
-      setStats({ ...stats, error: errMsg, status: "failed" });
-    }
-  };
-
   React.useEffect(() => {
-    getShortcodeStats(shortcode);
-  }, [shortcode]);
+    if (stats.status === "loading")
+      (async (code) => {
+        try {
+          const { data } = await axios.get(`/${code}/stats`);
+
+          const lastVisitedTime = data.lastSeenDate
+            ? formatDistanceToNow(new Date(String(data.lastSeenDate)))
+            : "-";
+
+          console.log("called");
+
+          setStats({
+            ...stats,
+            redirectCount: data.redirectCount,
+            lastSeenDate: lastVisitedTime,
+            status: "success",
+          });
+        } catch (error) {
+          const errMsg = error.response.data;
+          setStats({ ...stats, error: errMsg, status: "failed" });
+        }
+      })(shortcode);
+  }, [shortcode, stats]);
 
   return (
     <tr tabIndex="0" role="list" className={styles.tableData}>
