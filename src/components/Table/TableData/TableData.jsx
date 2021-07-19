@@ -8,7 +8,7 @@ import ErrorFallback from "../../ErrorFallback/ErrorFallback";
 
 import * as styles from "./TableData.module.scss";
 
-const TableData = ({ url, shortenedUrl, shortcode }) => {
+const TableData = ({ shortenedUrl, shortcode }) => {
   const [stats, setStats] = React.useState({
     redirectCount: 0,
     lastSeenDate: "-",
