@@ -1,14 +1,14 @@
 import * as React from "react";
 import Header from "./components/Header/Header";
 import Container from "./components/Container/Container";
-import SearchBox from "./components/SearchBox/SearchBox";
+import UrlBox from "./components/UrlBox/UrlBox";
 import Table from "./components/Table/Table";
 
 function App() {
   return (
     <Container>
       <Header />
-      <SearchBox />
+      <UrlBox />
       <Table />
     </Container>
   );

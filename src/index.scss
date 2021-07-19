@@ -3,8 +3,26 @@
 
 // Global Style
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: variable.$normal-text-font-family;
   font-size: variable.$normal-text-font-size;
   font-weight: variable.$normal-text-font-weight;
+  color: variable.$primary-text;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: variable.$primary-text;
+}
+
+p {
+  margin: 0;
 }

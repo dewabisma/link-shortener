@@ -17,11 +17,37 @@
     color: variable.$primary-text;
   }
 
+  input[type="text"]:focus {
+    outline: none;
+  }
+
+  input[type="text"]::placeholder {
+    color: variable.$unimportant-text;
+  }
+
   button {
     width: 15%;
-    background-color: variable.$accent-color;
     border: none;
     border-radius: variable.$default-border-radius;
+    background-color: variable.$accent-color;
     color: variable.$white-text;
+  }
+
+  button:disabled {
+    background-color: variable.$disabled-btn-bg;
+    color: variable.$disabled-btn-text;
+    cursor: not-allowed;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .searchBox {
+    input[type="text"] {
+      width: 60%;
+    }
+
+    button {
+      width: 30%;
+    }
   }
 }

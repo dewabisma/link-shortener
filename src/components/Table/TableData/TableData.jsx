@@ -9,10 +9,11 @@ const TableData = ({ url, shortenedUrl, visitCount, lastVisitTIme }) => {
   const distanceTime = formatDistanceToNow(lastVisitTIme);
 
   return (
-    <tr className={styles.tableData}>
+    <tr tabIndex="0" role="list" className={styles.tableData}>
       <td>
         <HistoryText url={url} shortenedUrl={shortenedUrl} />
       </td>
+
       <td>{visitCount}</td>
       <td>{distanceTime}</td>
     </tr>

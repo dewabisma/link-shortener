@@ -1,10 +1,35 @@
+@use '../../../../assets/variable';
+
 .historyText {
   .shortenedUrl {
     display: flex;
     align-items: center;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    width: fit-content;
 
     a {
       margin-right: 1rem;
+      font-weight: variable.$url-body-font-weight;
+      font-size: variable.$url-body-font-size;
+      width: 350px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      span {
+        color: variable.$accent-color;
+      }
+    }
+
+    p {
+      color: variable.$accent-color;
+      display: none;
+    }
+  }
+
+  .shortenedUrl:hover {
+    p {
+      display: block;
     }
   }
 
@@ -12,7 +37,30 @@
     text-overflow: ellipsis;
     overflow: hidden;
     display: block;
-    width: 500px;
+    width: 350px;
     white-space: nowrap;
+    color: variable.$unimportant-text;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .historyText {
+    .shortenedUrl {
+      a {
+        width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .shortenedUrl:hover {
+      p {
+        display: none;
+      }
+    }
+
+    .url {
+      width: 100px;
+    }
   }
 }

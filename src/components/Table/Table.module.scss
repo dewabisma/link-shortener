@@ -1,3 +1,5 @@
+@use '../../assets/variable';
+
 .table {
   .tableCaption {
     display: flex;
@@ -5,11 +7,16 @@
 
     h3 {
       margin-right: 1rem;
+      color: variable.$primary-text;
+      font-family: variable.$section-heading-font-family;
+      font-weight: variable.$section-heading-font-weight;
+      font-size: variable.$section-heading-font-size;
     }
 
     button {
       background-color: transparent;
       border: none;
+      color: variable.$accent-color;
     }
   }
 
@@ -19,19 +26,75 @@
   }
 
   .tableHead {
+    th {
+      font-weight: variable.$table-heading-font-weight;
+      font-size: variable.$table-heading-font-size;
+      text-transform: variable.$table-heading-text-transform;
+      color: variable.$secondary-text;
+    }
+
     th:first-child {
-      width: 70%;
+      // width: 70%;
       text-align: left;
     }
 
     th:nth-child(2) {
-      width: 10%;
+      // width: 10%;
       text-align: center;
     }
 
     th:last-child {
-      width: 20%;
+      // width: 20%;
       text-align: center;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .table {
+    .tableCaption {
+      display: flex;
+      align-items: center;
+
+      h3 {
+        margin-right: 1rem;
+        color: variable.$primary-text;
+        font-family: variable.$section-heading-font-family;
+        font-weight: variable.$section-heading-font-weight;
+        font-size: variable.$section-heading-font-size;
+      }
+
+      button {
+        background-color: transparent;
+        border: none;
+        color: variable.$accent-color;
+      }
+    }
+
+    table {
+      width: 100%;
+      border-spacing: 0;
+    }
+
+    .tableHead {
+      th {
+        font-weight: variable.$table-heading-font-weight;
+        font-size: variable.$table-heading-font-size;
+        text-transform: variable.$table-heading-text-transform;
+        color: variable.$secondary-text;
+      }
+
+      th:first-child {
+        text-align: left;
+      }
+
+      th:nth-child(2) {
+        text-align: center;
+      }
+
+      th:last-child {
+        text-align: center;
+      }
     }
   }
 }

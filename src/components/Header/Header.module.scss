@@ -17,3 +17,17 @@
     color: variable.$unimportant-text;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    h1 {
+      margin: 1rem 0 0.5rem 0;
+    }
+  }
+}
