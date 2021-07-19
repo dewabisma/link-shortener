@@ -1,14 +1,30 @@
 import * as React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectShortenedUrl,
+  clearHistory,
+} from "../../redux/shortenedLink/shortenedLinkSlice";
 import TableData from "./TableData/TableData";
 
 import * as styles from "./Table.module.scss";
 
 const Table = () => {
+  const dispatch = useDispatch();
+
+  const { entities } = useSelector((state) => selectShortenedUrl(state));
+
+  const clearHistoryHandler = () => {
+    if (entities) {
+      window.localStorage.removeItem("history");
+      dispatch(clearHistory());
+    }
+  };
+
   return (
     <div className={styles.table}>
       <div className={styles.tableCaption}>
         <h3>Previously shortened by you</h3>
-        <button>Clear history</button>
+        <button onClick={clearHistoryHandler}>Clear history</button>
       </div>
 
       <table>
@@ -21,26 +37,14 @@ const Table = () => {
         </thead>
 
         <tbody>
-          <TableData
-            url="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione, dolorem."
-            shortenedUrl="hahahahaha"
-            visitCount={12}
-            lastVisitTIme={new Date()}
-          />
-
-          <TableData
-            url="kwodwkodwko"
-            shortenedUrl="hahahahaha"
-            visitCount={12}
-            lastVisitTIme={new Date()}
-          />
-
-          <TableData
-            url="kwodwkodwko"
-            shortenedUrl="hahahahaha"
-            visitCount={12}
-            lastVisitTIme={new Date()}
-          />
+          {entities.map((entity) => (
+            <TableData
+              key={entity.id}
+              url={entity.url}
+              shortenedUrl={entity.shortenedUrl}
+              shortcode={entity.shortcode}
+            />
+          ))}
         </tbody>
       </table>
     </div>

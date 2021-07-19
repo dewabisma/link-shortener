@@ -7,8 +7,9 @@
     margin-bottom: 0.5rem;
     cursor: pointer;
     width: fit-content;
+    position: relative;
 
-    a {
+    div {
       margin-right: 1rem;
       font-weight: variable.$url-body-font-weight;
       font-size: variable.$url-body-font-size;
@@ -24,6 +25,9 @@
     p {
       color: variable.$accent-color;
       display: none;
+      position: absolute;
+      left: 350px;
+      width: fit-content;
     }
   }
 
@@ -46,7 +50,7 @@
 @media only screen and (max-width: 768px) {
   .historyText {
     .shortenedUrl {
-      a {
+      div {
         width: 100px;
         overflow: hidden;
         text-overflow: ellipsis;
