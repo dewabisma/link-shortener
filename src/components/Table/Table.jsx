@@ -4,7 +4,7 @@ import {
   selectShortenedUrl,
   clearHistory,
 } from "../../redux/shortenedLink/shortenedLinkSlice";
-import TableData from "./TableData/TableData";
+import TableData, { LinkDisplay, StatsDisplay } from "./TableData/TableData";
 
 import * as styles from "./Table.module.scss";
 
@@ -40,10 +40,12 @@ const Table = () => {
           {entities.map((entity) => (
             <TableData
               key={entity.id}
-              url={entity.url}
               shortenedUrl={entity.shortenedUrl}
               shortcode={entity.shortcode}
-            />
+            >
+              <LinkDisplay />
+              <StatsDisplay />
+            </TableData>
           ))}
         </tbody>
       </table>

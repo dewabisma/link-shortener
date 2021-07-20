@@ -1,12 +1,34 @@
 import * as React from "react";
 import * as styles from "./HistoryText.module.scss";
 
-const HistoryText = ({ shortcode, shortenedUrl }) => {
+export const ShortLink = ({ copyLink, children }) => {
   const newUrl = {
     base: "https://impraise-shorty.herokuapp.com/",
-    slug: `${shortcode}`,
+    slug: `${children}`,
   };
 
+  return (
+    <div onClick={copyLink} className={styles.shortenedUrl}>
+      <div role="presentation" className="shortened">
+        {newUrl.base}
+
+        <span>{newUrl.slug}</span>
+      </div>
+
+      <p>Click to copy this link</p>
+    </div>
+  );
+};
+
+export const ShortenedLink = ({ children }) => {
+  return (
+    <a className={styles.url} href={children}>
+      {children}
+    </a>
+  );
+};
+
+const HistoryText = ({ children }) => {
   const copyLink = (event) => {
     const range = document.createRange();
     const text = event.currentTarget.querySelector(".shortened");
@@ -20,21 +42,17 @@ const HistoryText = ({ shortcode, shortenedUrl }) => {
     alert(`Link copied to clipboard!`);
   };
 
+  const allowedTypes = [ShortLink, ShortenedLink];
+
   return (
     <div className={styles.historyText}>
-      <div onClick={copyLink} className={styles.shortenedUrl}>
-        <div role="presentation" className="shortened">
-          {newUrl.base}
-
-          <span>{newUrl.slug}</span>
-        </div>
-
-        <p>Click to copy this link</p>
-      </div>
-
-      <a className={styles.url} href={shortenedUrl}>
-        {shortenedUrl}
-      </a>
+      {React.Children.map(children, (child) => {
+        if (allowedTypes.includes(child.type)) {
+          return React.cloneElement(child, {
+            copyLink,
+          });
+        }
+      })}
     </div>
   );
 };

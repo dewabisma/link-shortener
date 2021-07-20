@@ -1,20 +1,87 @@
 import * as React from "react";
-// import { ErrorBoundary } from "react-error-boundary";
 import { formatDistanceToNow } from "date-fns";
 import axios from "axios";
 
-import HistoryText from "./HistoryText/HistoryText";
+import HistoryText, {
+  ShortLink,
+  ShortenedLink,
+} from "./HistoryText/HistoryText";
 import ErrorFallback from "../../ErrorFallback/ErrorFallback";
 
 import * as styles from "./TableData.module.scss";
 
-const TableData = ({ shortenedUrl, shortcode }) => {
+const StatsError = ({ stats }) => {
+  return (
+    <>
+      <td>
+        <ErrorFallback>{stats.error}</ErrorFallback>
+      </td>
+      <td>
+        <ErrorFallback>{stats.error}</ErrorFallback>
+      </td>
+    </>
+  );
+};
+
+const StatsLoading = () => {
+  return (
+    <>
+      <td>Loading...</td>
+      <td>Loading...</td>
+    </>
+  );
+};
+
+const StatsSuccess = ({ stats }) => {
+  return (
+    <>
+      <td>{stats.redirectCount}</td>
+      <td>{stats.lastSeenDate}</td>
+    </>
+  );
+};
+
+export const StatsDisplay = ({ stats }) => {
+  switch (stats.status) {
+    case "loading":
+      return <StatsLoading />;
+    case "success":
+      return <StatsSuccess stats={stats} />;
+    case "failed":
+      return <StatsError stats={stats} />;
+    default:
+      return (
+        <ErrorFallback>Error: something impossible happened</ErrorFallback>
+      );
+  }
+};
+
+export const LinkDisplay = ({ shortcode, shortenedUrl }) => {
+  return (
+    <td>
+      <HistoryText>
+        <ShortLink>{shortcode}</ShortLink>
+        <ShortenedLink>{shortenedUrl}</ShortenedLink>
+      </HistoryText>
+    </td>
+  );
+};
+
+const TableData = ({ children, shortcode, shortenedUrl }) => {
   const [stats, setStats] = React.useState({
     redirectCount: 0,
     lastSeenDate: "-",
     error: null,
     status: "loading",
   });
+
+  const allowedTypes = [
+    StatsError,
+    StatsDisplay,
+    StatsLoading,
+    StatsSuccess,
+    LinkDisplay,
+  ];
 
   React.useEffect(() => {
     if (stats.status === "loading")
@@ -26,8 +93,6 @@ const TableData = ({ shortenedUrl, shortcode }) => {
             ? formatDistanceToNow(new Date(String(data.lastSeenDate)))
             : "-";
 
-          console.log("called");
-
           setStats({
             ...stats,
             redirectCount: data.redirectCount,
@@ -35,7 +100,7 @@ const TableData = ({ shortenedUrl, shortcode }) => {
             status: "success",
           });
         } catch (error) {
-          const errMsg = error.response.data;
+          const errMsg = error.response ? error.response.data : error.message;
           setStats({ ...stats, error: errMsg, status: "failed" });
         }
       })(shortcode);
@@ -43,29 +108,15 @@ const TableData = ({ shortenedUrl, shortcode }) => {
 
   return (
     <tr tabIndex="0" role="list" className={styles.tableData}>
-      <td>
-        <HistoryText shortcode={shortcode} shortenedUrl={shortenedUrl} />
-      </td>
-      {stats.error ? (
-        <>
-          <td>
-            <ErrorFallback>{stats.error}</ErrorFallback>
-          </td>
-          <td>
-            <ErrorFallback>{stats.error}</ErrorFallback>
-          </td>
-        </>
-      ) : stats.status === "loading" ? (
-        <>
-          <td>Loading...</td>
-          <td>Loading...</td>
-        </>
-      ) : (
-        <>
-          <td>{stats.redirectCount}</td>
-          <td>{stats.lastSeenDate}</td>
-        </>
-      )}
+      {React.Children.map(children, (child) => {
+        if (allowedTypes.includes(child.type)) {
+          return React.cloneElement(child, {
+            stats,
+            shortcode,
+            shortenedUrl,
+          });
+        }
+      })}
     </tr>
   );
 };
