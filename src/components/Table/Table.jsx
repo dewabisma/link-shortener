@@ -13,6 +13,13 @@ const Table = () => {
 
   const { entities } = useSelector((state) => selectShortenedUrl(state));
 
+  const data = React.useMemo(() => {
+    const copyData = [...entities];
+    copyData.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+
+    return copyData;
+  }, [entities]);
+
   const clearHistoryHandler = () => {
     if (entities) {
       window.localStorage.removeItem("history");
@@ -27,7 +34,7 @@ const Table = () => {
         <button onClick={clearHistoryHandler}>Clear history</button>
       </div>
 
-      <table>
+      <table style={{ overflowX: "auto" }}>
         <thead>
           <tr className={styles.tableHead}>
             <th>LINK</th>
@@ -37,7 +44,7 @@ const Table = () => {
         </thead>
 
         <tbody>
-          {entities.map((entity) => (
+          {data.map((entity) => (
             <TableData
               key={entity.id}
               shortenedUrl={entity.shortenedUrl}

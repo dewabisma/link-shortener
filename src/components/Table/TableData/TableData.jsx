@@ -59,7 +59,7 @@ export const StatsDisplay = ({ stats }) => {
 export const LinkDisplay = ({ shortcode, shortenedUrl }) => {
   return (
     <td>
-      <HistoryText>
+      <HistoryText shortcode={shortcode}>
         <ShortLink>{shortcode}</ShortLink>
         <ShortenedLink>{shortenedUrl}</ShortenedLink>
       </HistoryText>

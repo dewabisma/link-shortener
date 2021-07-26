@@ -1,4 +1,7 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
+
+import { selectShortenedUrl } from "../../../../redux/shortenedLink/shortenedLinkSlice";
 import * as styles from "./HistoryText.module.scss";
 
 export const ShortLink = ({ copyLink, children }) => {
@@ -28,7 +31,15 @@ export const ShortenedLink = ({ children }) => {
   );
 };
 
-const HistoryText = ({ children }) => {
+const HistoryText = ({ children, shortcode }) => {
+  const { createNewStatus, entities } = useSelector((state) =>
+    selectShortenedUrl(state)
+  );
+
+  const isNew =
+    createNewStatus === "success" &&
+    entities[entities.length - 1].shortcode === shortcode;
+
   const copyLink = (event) => {
     const range = document.createRange();
     const text = event.currentTarget.querySelector(".shortened");
@@ -45,7 +56,13 @@ const HistoryText = ({ children }) => {
   const allowedTypes = [ShortLink, ShortenedLink];
 
   return (
-    <div className={styles.historyText}>
+    <div
+      className={
+        isNew
+          ? `${styles.historyText} ${styles.newlyAdded}`
+          : `${styles.historyText}`
+      }
+    >
       {React.Children.map(children, (child) => {
         if (allowedTypes.includes(child.type)) {
           return React.cloneElement(child, {

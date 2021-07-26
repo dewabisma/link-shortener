@@ -48,7 +48,7 @@ const SearchBox = () => {
           onClick={getShortenUrl}
           disabled={!url || createNewStatus === "loading"}
         >
-          Shorten this link
+          {createNewStatus === "loading" ? "Loading..." : "Shorten this link"}
         </button>
       </div>
     </>

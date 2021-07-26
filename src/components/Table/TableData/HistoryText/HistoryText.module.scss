@@ -1,6 +1,9 @@
 @use '../../../../assets/variable';
 
 .historyText {
+  padding: 1rem 0 1rem 1rem;
+  margin-left: -1rem;
+
   .shortenedUrl {
     display: flex;
     align-items: center;
@@ -45,6 +48,12 @@
     white-space: nowrap;
     color: variable.$unimportant-text;
   }
+}
+
+.historyText.newlyAdded {
+  box-shadow: -5px 0px 0px 0px variable.$accent-color;
+  border: none;
+  outline: none;
 }
 
 @media only screen and (max-width: 768px) {
