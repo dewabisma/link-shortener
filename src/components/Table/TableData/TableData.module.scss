@@ -1,19 +1,12 @@
 @use '../../../assets/variable';
 
 .tableData {
-  // td {
-  //   padding: 1rem 0 1rem 1rem;
-  //   margin-left: -1rem;
-  // }
-
   td:nth-child(2),
   td:last-child {
     text-align: center;
   }
-}
 
-// .tableData:focus {
-//   box-shadow: -5px 0px 0px 0px variable.$accent-color;
-//   border: none;
-//   outline: none;
-// }
+  td:last-child {
+    padding-left: 1rem;
+  }
+}

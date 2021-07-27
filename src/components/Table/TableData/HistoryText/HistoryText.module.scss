@@ -60,7 +60,6 @@
   .historyText {
     .shortenedUrl {
       div {
-        width: 100px;
         overflow: hidden;
         text-overflow: ellipsis;
       }
@@ -70,10 +69,6 @@
       p {
         display: none;
       }
-    }
-
-    .url {
-      width: 100px;
     }
   }
 }

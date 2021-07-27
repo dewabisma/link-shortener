@@ -34,17 +34,16 @@
     }
 
     th:first-child {
-      // width: 70%;
       text-align: left;
     }
 
     th:nth-child(2) {
-      // width: 10%;
       text-align: center;
     }
 
     th:last-child {
-      // width: 20%;
+      padding-left: 1rem;
+      white-space: nowrap;
       text-align: center;
     }
   }
@@ -53,11 +52,12 @@
 @media only screen and (max-width: 768px) {
   .table {
     .tableCaption {
-      display: flex;
-      align-items: center;
+      flex-direction: column;
+      margin-bottom: 1rem;
 
       h3 {
-        margin-right: 1rem;
+        text-align: center;
+        margin: 1rem 0;
         color: variable.$primary-text;
         font-weight: variable.$section-heading-font-weight;
         font-size: variable.$section-heading-font-size;

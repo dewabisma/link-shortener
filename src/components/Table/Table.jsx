@@ -34,28 +34,30 @@ const Table = () => {
         <button onClick={clearHistoryHandler}>Clear history</button>
       </div>
 
-      <table style={{ overflowX: "auto" }}>
-        <thead>
-          <tr className={styles.tableHead}>
-            <th>LINK</th>
-            <th>VISITS</th>
-            <th>LAST VISITED</th>
-          </tr>
-        </thead>
+      <div style={{ overflowX: "auto" }}>
+        <table>
+          <thead>
+            <tr className={styles.tableHead}>
+              <th>LINK</th>
+              <th>VISITS</th>
+              <th>LAST VISITED</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          {data.map((entity) => (
-            <TableData
-              key={entity.id}
-              shortenedUrl={entity.shortenedUrl}
-              shortcode={entity.shortcode}
-            >
-              <LinkDisplay />
-              <StatsDisplay />
-            </TableData>
-          ))}
-        </tbody>
-      </table>
+          <tbody>
+            {data.map((entity) => (
+              <TableData
+                key={entity.id}
+                shortenedUrl={entity.shortenedUrl}
+                shortcode={entity.shortcode}
+              >
+                <LinkDisplay />
+                <StatsDisplay />
+              </TableData>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
