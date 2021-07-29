@@ -2,7 +2,7 @@
 
 .historyText {
   padding: 1rem 0 1rem 1rem;
-  margin-left: -1rem;
+  margin-left: 5px;
 
   .shortenedUrl {
     display: flex;
@@ -52,6 +52,8 @@
 
 .historyText.newlyAdded {
   box-shadow: -5px 0px 0px 0px variable.$accent-color;
+  -webkit-box-shadow: -5px 0px 0px 0px variable.$accent-color;
+  -moz-box-shadow: -5px 0px 0px 0px variable.$accent-color;
   border: none;
   outline: none;
 }
